@@ -1,6 +1,5 @@
 import { Client, Account, ID, Query, Avatars, Locale } from 'appwrite'
-import conf from '../conf/conf';
-
+import conf from '../conf/conf.js';
 
 class authService {
     client = new Client();
