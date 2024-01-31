@@ -1,17 +1,38 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import Admin from '../pages/Admin.jpg'
+import '../pages/Home.css';
 
 function AdminProfile() {
-    const adminData=useSelector(state=>state.auth.userData);
-    console.log(adminData);
-
+  const adminData = useSelector(state => state.auth.userData);
+  console.log(adminData);
   return (
-    <div className='border-2 border-black'>
-        <h1>Admin Profile</h1>
+    <div>
+      <div class="container-admin">
+        <div class="profile-header">
+          <h1>Admin</h1>
+          <img src={Admin} alt="Admin pic" />
 
-        <div className='flex flex-col'>
-            <p>{adminData.name}</p>
         </div>
+        <div class="">
+          <h2 className='text-xl font-semibold my-2'>Information : </h2>
+          <ul className='text-lg text-gray-600 my-3'>
+            <li>Name :-  {adminData.name}</li>
+            <li>ID :-   {adminData.$id}</li>
+            <li className={`font-semibold ${adminData.status ? "text-green-600" : "text-red-500"}`}>Status :-   {adminData.status ? "Active" : "Inactive"}</li>
+            <li>Email :- {adminData.email}</li>
+            <li>Email Verified :- {adminData.emailVerification ? "true" : "false"}</li>
+            <li>Phone :-  {adminData.phone.length < 1 ? "+XXXXXXXXXX" : adminData.phone}</li>
+            <li>Phone Verified :- {adminData.phoneVerification ? "true" : "false"}</li>
+            <li>Update Date :-  {adminData.$updatedAt}</li>
+            <li>Registration Date :-  {adminData.registration}</li>
+          </ul>
+        </div>
+        <div className='flex gap-2'>
+          <button type="button" className="flex justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">Add Employee</button>
+          <button type="button" className="flex justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">Remove Employee</button>
+        </div>
+      </div>
     </div>
   )
 }
