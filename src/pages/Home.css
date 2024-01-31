@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
 }
-.container {
+.container-admin {
     max-width: 800px;
     margin: 50px auto;
     background-color: #f4f4f4;
@@ -11,12 +11,7 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-h1{
-    font-weight: 700;
-    margin-bottom: 5px;
-    font-size: 20px;
-    color: tomato;
-}
+
 .profile-header {
     text-align: center;
 }
@@ -46,18 +41,4 @@ h1{
     color: tomato;
     margin-top: 20px;
     font-size: 20px;
-}
-
-.profile-details ul {
-    
-    list-style: none;
-    padding: 0;
-}
-
-.profile-details li {
-    font-weight: 600;
-    margin-bottom: 5px;
-    font-size: 18px;
-    color: black;
-    margin: 5px 0;
 }
