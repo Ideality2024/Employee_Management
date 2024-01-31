@@ -1,18 +1,41 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import Admin from '../pages/Admin.jpg'
+import '../pages/Home.css';
 
 function AdminProfile() {
     const adminData=useSelector(state=>state.auth.userData);
     console.log(adminData);
 
   return (
-    <div className='border-2 border-black'>
-        <h1>Admin Profile</h1>
-
-        <div className='flex flex-col'>
-            <p>{adminData.name}</p>
+    <div>
+    <div class="container">
+        <div class="profile-header">
+        <h1>Admin</h1>
+            <img src={Admin} alt="Admin pic"/>
+            
         </div>
+        <div class="profile-details">
+            <h2>Information </h2>
+            <ul className=' card container rounded'>
+                <li>Name :-  {adminData.name}</li>
+                <li>ID :-   {adminData.$id}</li>
+                <li>Email :- {adminData.email}</li>
+                <li>Phone :-  {adminData.phone.length<1 ? +911234567890 : adminData.phone}</li>
+                <li>Update Date :-  {adminData.$updatedAt}</li>
+                <li>Registration Date :-  {adminData.registration}</li>
+            </ul>
+        </div>
+        <div className='mt-3 mb-3'>
+         <button type="button" className="flex justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">Add Employee</button>
+            <button type="button" className="flex justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">Remove Employee</button>
+      </div>
     </div>
+      
+      
+    </div>
+   
+  
   )
 }
 
