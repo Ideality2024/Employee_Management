@@ -5,7 +5,7 @@ import Footer from './layout/Footer'
 import { BrowserRouter as Router,Routes, Route } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import Admin from './pages/Admin'
-import EditEmpolyee from './layout/EditEmpolyee'
+import EditEmpolyee from './layout/EditEmployee'
 
 function App() {
 
@@ -19,8 +19,10 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path='/' element={<EditEmpolyee />} />
+        <Route path='/' element={<Home />} />
         <Route path='/admin' element={<Admin />} />
+        <Route path='/add-employee' element={<EditEmpolyee />} />
+        {/* <Route path='/about' element={<About/>}/> */}
         <Route path="/*" element={<NotFound/>} />
       </Routes>
       <Footer />
