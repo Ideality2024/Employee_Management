@@ -35,10 +35,10 @@ function Admin() {
         <div>
             {loggedIn ? (
 
-                <>
+                <div className='relative'>
                 <AdminProfile />
-                <button className='flex justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600' onClick={() => { auth.logout() }}>Logout</button>
-                </>
+                <button className=' absolute top-2 right-32 flex justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600' onClick={() => { auth.logout() }}>Logout</button>
+                </div>
             ) : (
                 <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 ">
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm">

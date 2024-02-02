@@ -6,6 +6,7 @@ import { BrowserRouter as Router,Routes, Route } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import Admin from './pages/Admin'
 import About from './pages/About'
+import EditEmpolyee from './layout/EditEmployee'
 
 function App() {
 
@@ -19,8 +20,9 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path='/' element={<About />} />
         <Route path='/admin' element={<Admin />} />
+        <Route path='/add-employee' element={<EditEmpolyee />} />
+        <Route path='/about' element={<About/>}/>
         <Route path="/*" element={<NotFound/>} />
       </Routes>
       <Footer />
