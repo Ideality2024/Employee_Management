@@ -7,22 +7,19 @@ import NotFound from './pages/NotFound'
 import Admin from './pages/Admin'
 import About from './pages/About'
 import EditEmpolyee from './layout/EditEmployee'
+import Contact from './pages/Contact'
 
 function App() {
 
   return (
-    // <div className=''>
-    //   <Navbar />
-    // <Home />
-    // <Footer />
-    // </div>
-
     <Router>
       <Navbar />
       <Routes>
+        <Route path='/' element={<Home />} />
         <Route path='/admin' element={<Admin />} />
         <Route path='/add-employee' element={<EditEmpolyee />} />
         <Route path='/about' element={<About/>}/>
+        <Route path='/contact' element={<Contact/>}/>
         <Route path="/*" element={<NotFound/>} />
       </Routes>
       <Footer />
