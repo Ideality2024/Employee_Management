@@ -8,6 +8,7 @@ import Admin from './pages/Admin'
 import About from './pages/About'
 import EditEmpolyee from './layout/EditEmployee'
 import Contact from './pages/Contact'
+import RemoveEmployee from './layout/RemoveEmployee'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path="/*" element={<NotFound/>} />
+        <Route path="/remove-employee" element={<RemoveEmployee/>} />
       </Routes>
       <Footer />
     </Router>
