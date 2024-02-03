@@ -11,6 +11,7 @@ function Home() {
         async function fetchData() {
         const data=await services.getEmployees();
         setEmployees(data.documents);
+        console.log(data.documents);
         }
         fetchData();
     },[])
@@ -35,15 +36,31 @@ function Home() {
                             </div>
                             <div className='my-3'>
                                 <p className='text-gray-400'>Job role :</p>
-                                <p>{employee.position}</p>
+                                <p>{employee.role}</p>
                             </div>
                             <div>
                                 <p className='text-gray-400 inline'>Age : </p>
-                                <p className='inline'>{employee.age}</p>
+                                <p className='inline'>{employee.birthdate?employee.birthdate:"Not defined"}</p>
                             </div>
-                            <div className='socials flex justify-center items-center gap-6 my-3'>
-                            <FaGithub   className='text-2xl hover-orange'/>
-                            <FaLinkedin className='text-2xl hover-orange'/>
+                            <div>
+                                <p className='text-gray-400 inline'>id : </p>
+                                <p className='inline'>{employee.$id}</p>
+                            </div>
+                            <div>
+                                <p className='text-gray-400 inline'>Address : </p>
+                                <p className='inline'>{employee.address}</p>
+                            </div>
+                            <div>
+                                <p className='text-gray-400 inline'>Mobile : </p>
+                                <p className='inline'>{employee.phone}</p>
+                            </div>
+                            <div>
+                                <p className='text-gray-400 inline'>Email : </p>
+                                <p className='inline'>{employee.email}</p>
+                            </div>
+                            <div>
+                                <p className='text-gray-400 inline'>Status : </p>
+                                <p className='inline'>{employee.status?"Active":"Inactive"}</p>
                             </div>
                         </div>
                     </div>

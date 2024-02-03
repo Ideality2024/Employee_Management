@@ -1,5 +1,4 @@
 import React from 'react';
-import './Contact.css';
 import Admin from './E-Krishak.jpg'
 
 const Contact = () => {

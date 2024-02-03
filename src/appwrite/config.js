@@ -24,7 +24,6 @@ export class Service {
             return uniqueID;
         }
 
-
         try {
             const documentId = generateUniqueID();
             const userDataR = userData;
