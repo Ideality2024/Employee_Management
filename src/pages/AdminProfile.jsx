@@ -9,13 +9,13 @@ function AdminProfile() {
   console.log(adminData);
   return (
     <div>
-      <div class="container-admin">
-        <div class="profile-header">
+      <div className="container-admin">
+        <div className="profile-header">
           <h1>Admin</h1>
           <img src={Admin} alt="Admin pic" />
 
         </div>
-        <div class="">
+        <div className="">
           <h2 className='text-xl font-semibold my-2'>Information : </h2>
           <ul className='text-lg text-gray-600 my-3'>
             <li>Name :-  {adminData.name}</li>
