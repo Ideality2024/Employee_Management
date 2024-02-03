@@ -20,6 +20,7 @@ function App() {
         <Route path='/add-employee' element={<EditEmpolyee />} />
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contact/>}/>
+        <Route path='/edit-employee' element={<EditEmpolyee/>}/>
         <Route path="/*" element={<NotFound/>} />
       </Routes>
       <Footer />

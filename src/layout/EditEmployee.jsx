@@ -18,8 +18,8 @@ function EditEmployee() {
           </div>
           <button className='absolute right-2 p-1 px-2 bg-orange-500 text-white rounded-xl h-9 w-15 mt-3 ml-56 '>Add</button>
         </div>
-        <div className='mt-2 mb-2 w-[50%]  overflow-y-scroll'>
-          <div className="container"><div>
+        <div className='mt-2 mb-2 w-[50%] h-[90%] overflow-y-scroll '>
+          <div>
             <label className=' mt-1' htmlFor="name">Name:</label>
             <input id="name" name="name" type="name" placeholder='Enter Name' className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
           </div>
@@ -76,7 +76,6 @@ function EditEmployee() {
               <input id="image url" name="image url" type="url" placeholder='Enter Image URL' className="  mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
             </div>
           </div>
-        </div>
       </div>
     </form>
   );
