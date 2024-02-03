@@ -1,9 +1,21 @@
-import React from 'react'
-import employees from "../layout/data"
-import { FaGithub } from 'react-icons/fa'
-import { FaLinkedin } from 'react-icons/fa'
+import React, { useEffect,useState } from 'react'
+// import employees from "../layout/data"
+import { FaGithub,FaLinkedin } from 'react-icons/fa'
+import services from '../appwrite/config'
 
 function Home() {
+
+    const [employees, setEmployees] = useState([])
+
+    useEffect(() => {
+        async function fetchData() {
+        const data=await services.getEmployees();
+        setEmployees(data.documents);
+        }
+        fetchData();
+    },[])
+
+
     return (
         <div className='flex flex-col justify-start'>
             <h1 className='text-4xl w-[100%] container'>Our Employees</h1>
