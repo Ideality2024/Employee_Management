@@ -1,7 +1,6 @@
 import React from 'react'
 import { FaOpencart } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-
 function Navbar() {
         return (
                 <nav className='bg-blue-100 py-1 text-black font-semibold flex justify-between items-center'>
