@@ -9,12 +9,14 @@ import About from './pages/About'
 import EditEmpolyee from './layout/EditEmployee'
 import Contact from './pages/Contact'
 import RemoveEmployee from './layout/RemoveEmployee'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
 
   return (
     <Router>
       <Navbar />
+      <Toaster />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/admin' element={<Admin />} />
@@ -22,8 +24,9 @@ function App() {
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/edit-employee' element={<EditEmpolyee/>}/>
+        <Route path='/edit-employee/:id' element={<EditEmpolyee/>}/>
+        <Route path="/delete-employee" element={<RemoveEmployee/>} />
         <Route path="/*" element={<NotFound/>} />
-        <Route path="/remove-employee" element={<RemoveEmployee/>} />
       </Routes>
       <Footer />
     </Router>

@@ -1,5 +1,6 @@
 import { Client, Account, ID, Query, Avatars, Locale } from 'appwrite'
 import conf from '../conf/conf.js';
+import toast from 'react-hot-toast';
 
 class authService {
     client = new Client();
@@ -18,12 +19,11 @@ class authService {
         try {
             const result = await this.account.createEmailSession(email, password);
             if (result) {
-                alert("Login successfully!");
+                toast.success("Login successfully!");
                 return await this.getCurrentUser();
             }
         } catch (error) {
-            alert(`${error.message}`);
-            throw error;
+            toast.error(`${error.message}`);
         }
     }
 
@@ -41,12 +41,11 @@ class authService {
         try {
             const result = await this.account.deleteSessions();
             if (result) {
-                alert("Logout successfully!");
+                toast.success("Logout successfully!");
                 return result;
             }
         } catch (error) {
-            alert(`${error.message}`);
-            throw error;
+            toast.error(`${error.message}`);
         }
     }
 

@@ -16,7 +16,7 @@ export class Service {
 
     // ** Create an Employee
     async createEmployee(data, userData) {
-        let toastId =toast.loading("Creating Employee...")
+        let toastId = toast.loading("Creating Employee...")
         function generateUniqueID() {
             const timestamp = Date.now().toString(36); // Convert timestamp to base36
             const randomString = Math.random().toString(36).substring(2, 8); // Use a shorter random string
@@ -27,7 +27,7 @@ export class Service {
         try {
             const documentId = generateUniqueID();
             const userDataR = userData;
-            const result= await this.databases.createDocument(
+            const result = await this.databases.createDocument(
                 "65b8e701ea15a4553c4f",
                 "65b8e71752e37c56ee47",
                 documentId, {
@@ -53,6 +53,36 @@ export class Service {
         }
     }
 
+    // ** Update an Employee
+    async updateEmployee(data,id, userData) {
+        try {
+            const userDataR = userData;
+            return await this.databases.updateDocument(
+                "65b8e701ea15a4553c4f",
+                "65b8e71752e37c56ee47",
+                id, {
+                name: data.name,
+                id: data.id,
+                role: data.role,
+                status: true,
+                gender: data.gender,
+                birthdate: data.birthdate,
+                department: data.department,
+                email: data.email,
+                phone: data.phone,
+                address: data.address,
+                by_id: userDataR.$id
+            }
+            )
+                .then(() => {
+                    toast.success("Employee Updated Successfully");
+                })
+        }
+        catch (error) {
+            alert.error(error.message);
+        }
+    }
+
 
 
 
@@ -73,7 +103,8 @@ export class Service {
     async getEmployee(id) {
         try {
             return await this.databases.getDocument(
-                conf.appwriteCollectionId_1,
+                "65b8e701ea15a4553c4f",
+                "65b8e71752e37c56ee47",
                 id
             );
         } catch (error) {
