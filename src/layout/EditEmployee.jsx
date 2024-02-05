@@ -1,20 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import services from '../appwrite/config';
 import { useDispatch, useSelector } from 'react-redux'
 import toast from 'react-hot-toast';
+import { useParams } from 'react-router-dom';
 
 function EditEmployee() {
 
-  const [name,setName]=useState('');
-  const [id,setId]=useState('');
-  const [role,setRole]=useState('');
+  const { id } = useParams();
+  const [edit, setEdit] = useState(false);
+  useEffect(() => {
+    async function fetchData() {
+      const data = await services.getEmployee(id);
+      if (data) {
+        setEdit(true);
+      }
+      setName(data.name);
+      setEmpId(data.id);
+      setRole(data.role);
+      setPhone(data.phone);
+      setEmail(data.email);
+      setAddress(data.address);
+    }
+    fetchData();
+  },[])
 
+  const [name,setName]=useState('');
+  const [empId,setEmpId]=useState('');
+  const [role,setRole]=useState('');
+  const [phone,setPhone]=useState('');
+  const [email,setEmail]=useState('');
+  const [address,setAddress]=useState('');
   const userData = useSelector(state => state.auth.userData)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target).entries());
-    services.createEmployee(data,userData);
+    if (edit) {
+      services.updateEmployee(data,id,userData);
+    }else{
+      services.createEmployee(data,userData);
+    }
   }
   return (
 
@@ -26,11 +51,11 @@ function EditEmployee() {
             <img src='https://th.bing.com/th/id/OIP.L8bs33mJBAUBA01wBfJnjQHaHa?rs=1&pid=ImgDetMain' className='w-44 h-44 border mt-4 rounded-full  ' />
           </div>
           <div className='text-center p-2  mt-4 '>
-            <p>ID:{id}</p>
+            <p>ID:{empId}</p>
             <p>Name: {name}</p>
             <p>Role: {role}</p>
           </div>
-          <button className='absolute right-2 p-1 px-2 bg-orange-500 text-white rounded-xl h-9 w-15 mt-3 ml-56 '>Add</button>
+          <button className='absolute right-2 p-1 px-2 bg-orange-500 text-white rounded-xl h-9 w-15 mt-3 ml-56 '>{edit?"Update":"Add"}</button>
         </div>
         <div className='mt-2 px-3 mb-2 w-[50%] h-[90%] overflow-y-scroll '>
           <div>
@@ -39,7 +64,7 @@ function EditEmployee() {
           </div>
           <div>
             <label className='mt-3' htmlFor="id">ID:</label>
-            <input required id="id" name="id" type="id" placeholder='Enter ID' value={id} onChange={(e)=>setId(e.target.value)} className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
+            <input required id="id" name="id" type="id" placeholder='Enter ID' value={empId} onChange={(e)=>setEmpId(e.target.value)} className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
           </div>
           <div>
             <label className=' mt-3' htmlFor="role">Role:</label>
@@ -74,19 +99,15 @@ function EditEmployee() {
           </div>
           <div>
             <label className=' mt-3' htmlFor="email">Email:</label>
-            <input required id="email" name="email" type="email" className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
+            <input value={email} onChange={(e)=>setEmail(e.target.value)} required id="email" name="email" type="email" className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
           </div>
           <div>
             <label className=' mt-3' htmlFor="phone">Mobile No:</label>
-            <input required  id="phone" name="phone" type="text" placeholder='Enter Phone Number' className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
+            <input value={phone} onChange={(e)=>setPhone(e.target.value)} required  id="phone" name="phone" type="text" placeholder='Enter Phone Number' className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
           </div>
           <div>
             <label className=' mt-3' htmlFor="address">Address:</label>
-            <input required id="address" name="address" type="address" placeholder='Enter Address' className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
-          </div>
-          <div>
-            <label className=' mt-3' htmlFor="imageUrl" >Image URL:</label>
-            <input required id="image url" name="image url" type="url" placeholder='Enter Image URL' className="  mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
+            <input value={address} onChange={(e)=>{setAddress(e.target.value)}} required id="address" name="address" type="address" placeholder='Enter Address' className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
           </div>
         </div>
       </div>
