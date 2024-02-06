@@ -91,7 +91,8 @@ export class Service {
     async deleteEmployee(id) {
         try {
             return await this.databases.deleteDocument(
-                conf.appwriteCollectionId_1,
+                "65b8e701ea15a4553c4f",
+                "65b8e71752e37c56ee47",
                 id
             );
         } catch (error) {

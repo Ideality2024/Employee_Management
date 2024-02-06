@@ -10,6 +10,7 @@ import EditEmpolyee from './layout/EditEmployee'
 import Contact from './pages/Contact'
 import RemoveEmployee from './layout/RemoveEmployee'
 import { Toaster } from 'react-hot-toast'
+import EmpProfile from './layout/EmpProfile'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Route path='/edit-employee' element={<EditEmpolyee/>}/>
         <Route path='/edit-employee/:id' element={<EditEmpolyee/>}/>
         <Route path="/delete-employee" element={<RemoveEmployee/>} />
+        <Route path="/delete-employee/:id" element={<EmpProfile/>} />
         <Route path="/*" element={<NotFound/>} />
       </Routes>
       <Footer />
