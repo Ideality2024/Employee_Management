@@ -19,7 +19,6 @@ function Admin() {
             if (res || res !== null) {
                 setLoggedIn(true)
                 dispatch(login(res))
-                console.log(userData);
             }
         })
     }, [])
