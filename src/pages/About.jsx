@@ -1,5 +1,4 @@
 import React from 'react'
-import './About.css';
 import Admin from './Admin.jpg'
 function About() {
   return (

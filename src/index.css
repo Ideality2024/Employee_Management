@@ -1,16 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.hover-orange{
-    cursor: pointer;
-}
-
-.hover-orange:hover{
-    color: orange;
-}
-
-.container{
-    padding-inline: 50px;
-    margin-top: 20px;
-}
