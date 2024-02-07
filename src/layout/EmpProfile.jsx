@@ -39,7 +39,7 @@ function EmpProfile() {
                     </div>
                 ) : (
                     emp && (
-                        <div className='p-3 flex flex-col w-[50%] justify-center items-center border-4 border-black'>
+                        <div className='p-3 flex flex-col md:w-[50%] justify-center items-center border-4 border-black'>
                             <h1>{emp.name}</h1>
                             <p>{emp.id}</p>
                             <p>{emp.email}</p>

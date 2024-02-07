@@ -8,8 +8,8 @@ export class Service {
     bucket;
     constructor() {
         this.client
-            .setEndpoint("https://cloud.appwrite.io/v1")
-            .setProject("65b8e56846ffd244f228")
+            .setEndpoint(conf.appwriteUrl)
+            .setProject(conf.appwriteProjectId)
         this.databases = new Databases(this.client);
         this.bucket = new Storage(this.client);
     }
@@ -28,8 +28,8 @@ export class Service {
             const documentId = generateUniqueID();
             const userDataR = userData;
             const result = await this.databases.createDocument(
-                "65b8e701ea15a4553c4f",
-                "65b8e71752e37c56ee47",
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId_1,
                 documentId, {
                 name: data.name,
                 id: data.id,
@@ -58,8 +58,8 @@ export class Service {
         try {
             const userDataR = userData;
             return await this.databases.updateDocument(
-                "65b8e701ea15a4553c4f",
-                "65b8e71752e37c56ee47",
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId_1,
                 id, {
                 name: data.name,
                 id: data.id,
@@ -91,8 +91,8 @@ export class Service {
     async deleteEmployee(id) {
         try {
             return await this.databases.deleteDocument(
-                "65b8e701ea15a4553c4f",
-                "65b8e71752e37c56ee47",
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId_1,
                 id
             );
         } catch (error) {
@@ -104,8 +104,8 @@ export class Service {
     async getEmployee(id) {
         try {
             return await this.databases.getDocument(
-                "65b8e701ea15a4553c4f",
-                "65b8e71752e37c56ee47",
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId_1,
                 id
             );
         } catch (error) {
@@ -117,8 +117,8 @@ export class Service {
     async getEmployees() {
         try {
             return await this.databases.listDocuments(
-                "65b8e701ea15a4553c4f",
-                "65b8e71752e37c56ee47",
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId_1,
             );
         } catch (error) {
             console.log(error);
