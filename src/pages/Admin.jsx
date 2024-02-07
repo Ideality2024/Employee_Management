@@ -21,7 +21,7 @@ function Admin() {
             setLoader(false)
         },1100)
         auth.getCurrentUser().then((res) => {
-            if (res || res !== null || res !== undefined) {
+            if (res || res !== null) {
                 setLoader(true)
                 setLoggedIn(true)
                 dispatch(login(res))
@@ -35,9 +35,7 @@ function Admin() {
         setLoader(true)
         auth.login(email, password).then((res) => {
             dispatch(login(res))
-            if (res || res !== null || res !== undefined) {
-                setLoggedIn(true)
-            }
+            setLoggedIn(true)
             setLoader(false)
         })
     };
@@ -68,7 +66,7 @@ function Admin() {
                     <div className='relative'>
                         <AdminProfile />
                         <button
-                            className='absolute md:top-2 top-5 right-0 md:right-32 flex justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600'
+                            className='absolute top-2 right-32 flex justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600'
                             onClick={handleLogout}
                         >
                             Logout
