@@ -10,8 +10,8 @@ class authService {
 
     constructor() {
         this.client
-            .setEndpoint("https://cloud.appwrite.io/v1")
-            .setProject("65b8e56846ffd244f228")
+            .setEndpoint(conf.appwriteUrl)
+            .setProject(conf.appwriteProjectId)
         this.account = new Account(this.client)
     }
 
@@ -32,7 +32,7 @@ class authService {
         try {
             return await this.account.get();
         } catch (error) {
-            console.log("\n\nUser Not Registered yet please Signup \n\n\n", error);
+            toast.error(`${error.message}`);
         }
         return null;
     }

@@ -45,8 +45,8 @@ function EditEmployee() {
 
     <form onSubmit={handleSubmit}>
       <h1 className='text-center mt-10 font-bold hover-orange '>Add Employee/Edit Employee</h1>
-      <div className=" container gap-4 mb-4 h-96 border flex ">
-        <div className='relative mt-2 mb-2 w-[45%] border-b-2 border-r-2 shadow-md  flex flex-col'>
+      <div className=" container gap-4 mb-4 md:h-96 border md:flex ">
+        <div className='relative mt-2 mb-2 md:w-[45%] border-b-2 border-r-2 shadow-md  flex flex-col'>
           <div className='img flex justify-center'>
             <img src='https://th.bing.com/th/id/OIP.L8bs33mJBAUBA01wBfJnjQHaHa?rs=1&pid=ImgDetMain' className='w-44 h-44 border mt-4 rounded-full  ' />
           </div>
@@ -57,7 +57,7 @@ function EditEmployee() {
           </div>
           <button className='absolute right-2 p-1 px-2 bg-orange-500 text-white rounded-xl h-9 w-15 mt-3 ml-56 '>{edit?"Update":"Add"}</button>
         </div>
-        <div className='mt-2 px-3 mb-2 w-[50%] h-[90%] overflow-y-scroll '>
+        <div className='mt-2 px-3 mb-2 md:w-[50%] h-[90%] overflow-y-scroll '>
           <div>
             <label className=' mt-1' htmlFor="name">Name:</label>
             <input required id="name" name="name" type="name" placeholder='Enter Name' value={name} onChange={(e)=>setName(e.target.value)} className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>

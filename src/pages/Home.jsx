@@ -14,6 +14,9 @@ function Home() {
 
     useEffect(() => {
         setLoader(true)
+        setTimeout(() => {
+            setLoader(false)
+        }, 1300)
         async function fetchData() {
             const data = await services.getEmployees();
             setEmployees(data.documents);
@@ -33,14 +36,14 @@ function Home() {
                 ) : (
                     <div>
                         <div className='flex flex-col justify-start'>
-                            <h1 className={`text-4xl w-[100%] container ${employees < 1 ? "hidden" : "block"}`}>Our Employees</h1>
-                            <div className='flex p-9 gap-4 flex-wrap'>
+                            <h1 className={`md:text-4xl text-xl md:w-[100%] container ${employees < 1 ? "hidden" : "block"}`}>Our Employees</h1>
+                            <div className='flex md:p-9 p-2 md:gap-4 gap-2 flex-wrap'>
                                 {employees.length < 1 ?
-                                    <div className='text-5xl w-[100vw] flex justify-center items-center h-[60vh]'>
+                                    <div className='md:text-5xl md:w-[100vw] flex justify-center items-center h-[60vh]'>
                                         No Data Found
                                     </div>
                                     : employees.map((employee) => (
-                                        <div key={employee.$id} className='rounded-lg border-2 gap-2 max-w-max flex border-black hover:shadow-xl hover:shadow-orange-400 transition-all ease-in-out hover:scale-[1.02]'>
+                                        <div key={employee.$id} className='rounded-lg border-2 gap-2 md:max-w-max flex md:flex-row flex-col border-black hover:shadow-xl hover:shadow-orange-400 transition-all ease-in-out hover:scale-[1.02]'>
 
 
                                             <div className='img bg-orange-400 p-3 '>
@@ -53,10 +56,11 @@ function Home() {
                                                 }} className={` border-2 bg-orange-400 px-2 rounded-md text-white hover:scale-[1.1] ${adminData ? "block" : "hidden"}`} type='button'>Edit</button>
                                                 <button onClick={() => {
                                                     navigate(`/delete-employee/${employee.$id}`)
+                                                    z
                                                 }} className={` border-2 bg-orange-400 px-2 rounded-md text-white hover:scale-[1.1] ${adminData ? "block" : "hidden"}`} type='button'>Delete</button>
                                             </div>
 
-                                            <div className='details pr-2 select-none'>
+                                            <div className='details md:pr-2 select-none'>
                                                 <div className='mt-3'>
                                                     <p className='text-gray-400'>Name :</p>
                                                     <p>{employee.name}</p>
