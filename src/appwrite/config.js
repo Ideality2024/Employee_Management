@@ -34,7 +34,7 @@ export class Service {
                 name: data.name,
                 id: data.id,
                 role: data.role,
-                status: true,
+                status: data.status,
                 gender: data.gender,
                 birthdate: data.birthdate,
                 department: data.department,
@@ -64,7 +64,7 @@ export class Service {
                 name: data.name,
                 id: data.id,
                 role: data.role,
-                status: true,
+                status: data.status,
                 gender: data.gender,
                 birthdate: data.birthdate,
                 department: data.department,
@@ -79,7 +79,7 @@ export class Service {
                 })
         }
         catch (error) {
-            alert.error(error.message);
+            toast.error(error.message);
         }
     }
 

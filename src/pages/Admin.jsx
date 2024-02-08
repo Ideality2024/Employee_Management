@@ -66,7 +66,7 @@ function Admin() {
                     <div className='relative'>
                         <AdminProfile />
                         <button
-                            className='absolute top-2 right-32 flex justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600'
+                            className='absolute top-2 md:right-32 right-3 flex justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600'
                             onClick={handleLogout}
                         >
                             Logout
