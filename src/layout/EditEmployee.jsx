@@ -8,37 +8,38 @@ function EditEmployee() {
 
   const { id } = useParams();
   const [edit, setEdit] = useState(false);
+  const [name, setName] = useState('');
+  const [empId, setEmpId] = useState('');
+  const [role, setRole] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const userData = useSelector(state => state.auth.userData)
+
   useEffect(() => {
     async function fetchData() {
       const data = await services.getEmployee(id);
       if (data) {
         setEdit(true);
       }
-      setName(data.name);
-      setEmpId(data.id);
-      setRole(data.role);
-      setPhone(data.phone);
-      setEmail(data.email);
-      setAddress(data.address);
+      setName(data ? data.name : null);
+      setEmpId(data ? data.id : null);
+      setRole(data ? data.role : null);
+      setPhone(data ? data.phone : null);
+      setEmail(data ? data.email : null);
+      setAddress(data ? data.address : null);
     }
     fetchData();
-  },[])
+  }, [])
 
-  const [name,setName]=useState('');
-  const [empId,setEmpId]=useState('');
-  const [role,setRole]=useState('');
-  const [phone,setPhone]=useState('');
-  const [email,setEmail]=useState('');
-  const [address,setAddress]=useState('');
-  const userData = useSelector(state => state.auth.userData)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target).entries());
     if (edit) {
-      services.updateEmployee(data,id,userData);
-    }else{
-      services.createEmployee(data,userData);
+      services.updateEmployee(data, id, userData);
+    } else {
+      services.createEmployee(data, userData);
     }
   }
   return (
@@ -55,20 +56,20 @@ function EditEmployee() {
             <p>Name: {name}</p>
             <p>Role: {role}</p>
           </div>
-          <button className='absolute right-2 p-1 px-2 bg-orange-500 text-white rounded-xl h-9 w-15 mt-3 ml-56 '>{edit?"Update":"Add"}</button>
+          <button className='absolute right-2 p-1 px-2 bg-orange-500 text-white rounded-xl h-9 w-15 mt-3 ml-56 '>{edit ? "Update" : "Add"}</button>
         </div>
         <div className='mt-2 px-3 mb-2 md:w-[50%] h-[90%] overflow-y-scroll '>
           <div>
             <label className=' mt-1' htmlFor="name">Name:</label>
-            <input required id="name" name="name" type="name" placeholder='Enter Name' value={name} onChange={(e)=>setName(e.target.value)} className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
+            <input required id="name" name="name" type="name" placeholder='Enter Name' value={name} onChange={(e) => setName(e.target.value)} className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
           </div>
           <div>
             <label className='mt-3' htmlFor="id">ID:</label>
-            <input required id="id" name="id" type="id" placeholder='Enter ID' value={empId} onChange={(e)=>setEmpId(e.target.value)} className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
+            <input required id="id" name="id" type="id" placeholder='Enter ID' value={empId} onChange={(e) => setEmpId(e.target.value)} className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
           </div>
           <div>
             <label className=' mt-3' htmlFor="role">Role:</label>
-            <input required id="role" name="role" type="role" placeholder='Enter Role' value={role} onChange={(e)=>setRole(e.target.value)} className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
+            <input required id="role" name="role" type="role" placeholder='Enter Role' value={role} onChange={(e) => setRole(e.target.value)} className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
           </div>
           <div>
             <label className=' mt-3' htmlFor="status">Status:</label>
@@ -86,8 +87,8 @@ function EditEmployee() {
             </select>
           </div>
           <div>
-            <label className=' mt-3' htmlFor="date of birth">Date of Birth:</label>
-            <input id="date" name="date of bith" type="date" className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
+            <label className=' mt-3' htmlFor="birthdate">Date of Birth:</label>
+            <input id="birthdate" name="birthdate" type="date" className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
           </div>
           <div>
             <label className=' mt-3' htmlFor="department">Department:</label>
@@ -99,15 +100,15 @@ function EditEmployee() {
           </div>
           <div>
             <label className=' mt-3' htmlFor="email">Email:</label>
-            <input value={email} onChange={(e)=>setEmail(e.target.value)} required id="email" name="email" type="email" className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
+            <input value={email} onChange={(e) => setEmail(e.target.value)} required id="email" name="email" type="email" className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
           </div>
           <div>
             <label className=' mt-3' htmlFor="phone">Mobile No:</label>
-            <input value={phone} onChange={(e)=>setPhone(e.target.value)} required  id="phone" name="phone" type="text" placeholder='Enter Phone Number' className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
+            <input value={phone} onChange={(e) => setPhone(e.target.value)} required id="phone" name="phone" type="text" placeholder='Enter Phone Number' className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
           </div>
           <div>
             <label className=' mt-3' htmlFor="address">Address:</label>
-            <input value={address} onChange={(e)=>{setAddress(e.target.value)}} required id="address" name="address" type="address" placeholder='Enter Address' className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
+            <input value={address} onChange={(e) => { setAddress(e.target.value) }} required id="address" name="address" type="address" placeholder='Enter Address' className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
           </div>
         </div>
       </div>

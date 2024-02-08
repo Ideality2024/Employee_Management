@@ -9,21 +9,20 @@ function AdminProfile() {
   return (
     <div>
       <div className="container-admin">
-        <div className="profile-header">
+        <div className="profile-header flex flex-col justify-center items-center gap-4 md:inline">
           <h1>Admin</h1>
-          <img src={Admin} alt="Admin pic" />
-
+          <img src={Admin} alt="Admin pic" className='' />
         </div>
         <div className="">
-          <h2 className='text-xl font-semibold my-2'>Information : </h2>
+          <h2 className='text-xl font-semibold my-2 text-center md:text-left'>Information</h2>
           <ul className='text-lg text-gray-600 my-3'>
             <li>Name :-  {adminData.name}</li>
             <li>ID :-   {adminData.$id}</li>
             <li className={`font-semibold ${adminData.status ? "text-green-600" : "text-red-500"}`}>Status :-   {adminData.status ? "Active" : "Inactive"}</li>
             <li>Email :- {adminData.email}</li>
-            <li>Email Verified :- {adminData.emailVerification ? "true" : "false"}</li>
+            <li className={`${adminData.emailVerification?"text-green-600":"text-red-600"}`}>Email Verified :- {adminData.emailVerification ? "Yes" : "No"}</li>
             <li>Phone :-  {adminData.phone.length < 1 ? "+XXXXXXXXXX" : adminData.phone}</li>
-            <li>Phone Verified :- {adminData.phoneVerification ? "true" : "false"}</li>
+            <li className={`${adminData.phoneVerification?"text-green-600":"text-red-600"}`}>Phone Verified :- {adminData.phoneVerification ? "Yes" : "No"}</li>
             <li>Update Date :-  {adminData.$updatedAt}</li>
             <li>Registration Date :-  {adminData.registration}</li>
           </ul>
