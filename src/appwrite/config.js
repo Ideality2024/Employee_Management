@@ -6,6 +6,7 @@ export class Service {
     client = new Client();
     databases;
     bucket;
+
     constructor() {
         this.client
             .setEndpoint(conf.appwriteUrl)
@@ -41,7 +42,8 @@ export class Service {
                 email: data.email,
                 phone: data.phone,
                 address: data.address,
-                by_id: userDataR.$id
+                profileImg: data.profileImg,
+                by_id: userDataR.$id,
             }
             );
             if (result) {
@@ -71,7 +73,8 @@ export class Service {
                 email: data.email,
                 phone: data.phone,
                 address: data.address,
-                by_id: userDataR.$id
+                by_id: userDataR.$id,
+                profileImg: data.profileImg,
             }
             )
                 .then(() => {
@@ -102,16 +105,19 @@ export class Service {
 
     // ** get an particular Employee
     async getEmployee(id) {
+        const documentId=id;
         try {
             return await this.databases.getDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId_1,
-                id
+                documentId  // Pass 'id' as the documentId
             );
         } catch (error) {
-            console.log(error);
+
+            // console.log(error);
         }
     }
+    
 
     // ** Get maxt 100 Employees
     async getEmployees() {
@@ -124,6 +130,47 @@ export class Service {
             console.log(error);
         }
     }
+
+
+    // ** User Profile Photo upload
+    async uploadProfilePhoto(file) {
+        try {
+            const result= await this.bucket.createFile(
+                conf.appwriteBucketId,
+                ID.unique(),
+                file,
+            );
+            return result;
+        } catch (error) {
+            toast.error(error.message);
+        }
+    }
+
+        // **Delete files from the Appwrite storage
+        async deleteFile(fileId) {
+            try {
+                await this.bucket.deleteFile(
+                    conf.appwriteBucketId,
+                    fileId
+                );
+                return true;
+            } catch (error) {
+                throw error;
+            }
+        }
+    
+        // **Get file preview from the Appwrite storage
+        getFilePreview(fileId) {
+            try{
+                return this.bucket.getFilePreview(
+                    conf.appwriteBucketId,
+                    fileId,
+                );
+            }
+            catch(error){
+                // console.log(error.message);
+            }
+        }
 }
 
 const services = new Service();

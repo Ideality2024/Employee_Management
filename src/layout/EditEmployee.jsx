@@ -22,12 +22,12 @@ function EditEmployee() {
       if (data) {
         setEdit(true);
       }
-      setName(data ? data.name : null);
-      setEmpId(data ? data.id : null);
-      setRole(data ? data.role : null);
-      setPhone(data ? data.phone : null);
-      setEmail(data ? data.email : null);
-      setAddress(data ? data.address : null);
+      setName(data ? data.name : name);
+      setEmpId(data ? data.id : id);
+      setRole(data ? data.role : role);
+      setPhone(data ? data.phone : phone);
+      setEmail(data ? data.email : email);
+      setAddress(data ? data.address : address);
     }
     fetchData();
   }, [])
@@ -37,9 +37,15 @@ function EditEmployee() {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target).entries());
     if (edit) {
+      
       services.updateEmployee(data, id, userData);
     } else {
-      services.createEmployee(data, userData);
+      services.uploadProfilePhoto(data.profileImg).then((res) => {
+        data.profileImg = res.$id;
+        if(res.$id) {
+          services.createEmployee(data, userData,res);
+        }
+      })
     }
   }
   return (
@@ -109,6 +115,10 @@ function EditEmployee() {
           <div>
             <label className=' mt-3' htmlFor="address">Address:</label>
             <input value={address} onChange={(e) => { setAddress(e.target.value) }} required id="address" name="address" type="address" placeholder='Enter Address' className=" mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"></input>
+          </div>
+          <div>
+            <label className=' mt-3' htmlFor="file">Profile:</label>
+            <input required id="file" name="profileImg" type="file" placeholder='Enter Address' className=""></input>
           </div>
         </div>
       </div>
