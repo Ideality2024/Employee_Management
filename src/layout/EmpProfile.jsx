@@ -22,16 +22,20 @@ function EmpProfile() {
     function handleSubmit() {
         const result = services.deleteEmployee(id).then((res) => {
             if (result) {
-                setTimeout(() => {
-                    navigate('/delete-employee');
-                }, 2000)
+                services.deleteFile(emp.profileImg).then((res) => {
+                    if (res) {
+                        setTimeout(() => {
+                            navigate('/delete-employee');
+                        }, 2000)
+                    }
+                })
             }
             return
         })
     }
 
     return (
-        <div className='p-3 h-[90vh]'>
+        <div className='p-3 min-h-max'>
             {
                 loader ? (
                     <div className='h-[90vh] flex justify-center items-center'>
@@ -40,6 +44,7 @@ function EmpProfile() {
                 ) : (
                     emp && (
                         <div className='p-3 flex flex-col md:w-[50%] justify-center items-center border-4 border-black'>
+                            <img src={`${emp.profileImg ? services.getFilePreview(emp.profileImg) : "https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_0.jpg"}`} alt='employee profile' />
                             <h1>{emp.name}</h1>
                             <p>{emp.id}</p>
                             <p>{emp.email}</p>
