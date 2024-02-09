@@ -93,13 +93,16 @@ export class Service {
     // ** Delete an Employee
     async deleteEmployee(id) {
         try {
-            return await this.databases.deleteDocument(
+            const result= await this.databases.deleteDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId_1,
                 id
             );
+            if (result) {
+                toast.success("Employee Deleted Successfully");
+            }
         } catch (error) {
-            console.log(error);
+            toast.error(error.message);
         }
     }
 
@@ -155,7 +158,8 @@ export class Service {
                 );
                 return true;
             } catch (error) {
-                throw error;
+                toast.error(error.message);
+                return true;
             }
         }
     
