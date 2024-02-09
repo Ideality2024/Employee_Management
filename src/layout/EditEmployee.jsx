@@ -14,6 +14,7 @@ function EditEmployee() {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
+  const [profileImg, setProfileImg] = useState('');
   const userData = useSelector(state => state.auth.userData)
 
   useEffect(() => {
@@ -21,13 +22,14 @@ function EditEmployee() {
       const data = await services.getEmployee(id);
       if (data) {
         setEdit(true);
+        setName(data ? data.name : name);
+        setEmpId(data ? data.id : id);
+        setRole(data ? data.role : role);
+        setPhone(data ? data.phone : phone);
+        setEmail(data ? data.email : email);
+        setAddress(data ? data.address : address);
+        setProfileImg(data ? data.profileImg : profileImg);
       }
-      setName(data ? data.name : name);
-      setEmpId(data ? data.id : id);
-      setRole(data ? data.role : role);
-      setPhone(data ? data.phone : phone);
-      setEmail(data ? data.email : email);
-      setAddress(data ? data.address : address);
     }
     fetchData();
   }, [])
@@ -37,13 +39,20 @@ function EditEmployee() {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target).entries());
     if (edit) {
-      
-      services.updateEmployee(data, id, userData);
+      if (profileImg !== '' && profileImg) {
+        services.deleteFile(profileImg);
+      }
+      services.uploadProfilePhoto(data.profileImg).then((res) => {
+        data.profileImg = res.$id;
+        if (res.$id) {
+          services.updateEmployee(data, id, userData);
+        }
+      })
     } else {
       services.uploadProfilePhoto(data.profileImg).then((res) => {
         data.profileImg = res.$id;
-        if(res.$id) {
-          services.createEmployee(data, userData,res);
+        if (res.$id) {
+          services.createEmployee(data, userData, res);
         }
       })
     }
