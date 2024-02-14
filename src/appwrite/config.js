@@ -158,7 +158,7 @@ export class Service {
                 );
                 return true;
             } catch (error) {
-                toast.error(error.message);
+                // toast.error(error.message);
                 return true;
             }
         }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 // import employees from "../layout/data"
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import services from '../appwrite/config'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
 import { useDispatch, useSelector } from 'react-redux'
 import Outro from '../layout/Outro'
@@ -44,7 +44,9 @@ function Home() {
                                         No Data Found
                                     </div>
                                     : employees.map((employee) => (
-                                        <Outro employee={employee}/>
+                                        <Link to={`/${adminData?employee.$id:""}`}>
+                                            <Outro employee={employee} />
+                                        </Link>
                                     ))}
                             </div>
                         </div>
