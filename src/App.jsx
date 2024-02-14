@@ -29,6 +29,7 @@ function App() {
         <Route path='/edit-employee/:id' element={<EditEmpolyee />} />
         <Route path="/delete-employee" element={<RemoveEmployee />} />
         <Route path="/delete-employee/:id" element={<EmpProfile />} />
+        <Route path="/:id" element={<EmpProfile />} />
         <Route path="/loader" element={<ClipLoader color="#36d7b7" />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>

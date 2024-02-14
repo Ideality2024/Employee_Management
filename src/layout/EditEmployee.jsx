@@ -39,18 +39,33 @@ function EditEmployee() {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target).entries());
     if (edit) {
-      if (profileImg !== '' && profileImg) {
-        services.deleteFile(profileImg);
+      // if (profileImg !== '' && profileImg) {
+      //   if (profileImg == data.profileImg) {
+      //     return services.updateEmployee(data, id, userData);
+      //   }
+      //   services.deleteFile(profileImg);
+      //   services.uploadProfilePhoto(data.profileImg).then((res) => {
+      //     data.profileImg = res;
+      //     console.log(res);
+      //     if (res) {
+      //       services.updateEmployee(data, id, userData);
+      //     }
+      //   })
+      // }
+      if (profileImg == data.profileImg) {
+        return services.updateEmployee(data, id, userData);
+      }else{
+        services.uploadProfilePhoto(data.profileImg).then((res) => {
+          data.profileImg = res.$id;
+          if (res) {
+            services.updateEmployee(data, id, userData);
+            services.deleteFile(profileImg);
+          }
+        })
       }
-      services.uploadProfilePhoto(data.profileImg).then((res) => {
-        data.profileImg = res.$id;
-        if (res.$id) {
-          services.updateEmployee(data, id, userData);
-        }
-      })
     } else {
       services.uploadProfilePhoto(data.profileImg).then((res) => {
-        data.profileImg = res.$id;
+        data.profileImg = res?.$id;
         if (res.$id) {
           services.createEmployee(data, userData, res);
         }
@@ -127,7 +142,8 @@ function EditEmployee() {
           </div>
           <div>
             <label className=' mt-3' htmlFor="file">Profile:</label>
-            <input required id="file" name="profileImg" type="file" placeholder='Enter Address' className=""></input>
+            <input id="file" name="profileImg" type="file" placeholder='FILE' className=""></input>
+            {profileImg?.length > 0 && <img src={services.getFilePreview(profileImg)} alt='profile' />}
           </div>
         </div>
       </div>
