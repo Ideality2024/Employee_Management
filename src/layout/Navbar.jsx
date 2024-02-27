@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 function Navbar() {
         return (
                 <nav className='bg-blue-100 py-1 text-black md:font-semibold flex justify-between items-center'>
-                        <div className='logo md:px-4 px-3'>
+                        <Link to={'/'} className='logo md:px-4 px-3'>
                                 <FaOpencart className='md:text-3xl hover-orange' />
-                        </div>
+                        </Link>
 
                         <div className='list'>
                                 <ul className='flex md:gap-9 gap-4 text-[10px] md:text-[1rem]'>
