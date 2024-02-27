@@ -16,7 +16,7 @@ function AdminProfile() {
         <div className="">
           <h2 className='text-xl font-semibold my-2 text-center md:text-left'>Information</h2>
           <ul className='text-lg text-gray-600 my-3'>
-            <li>Name :-  {adminData.name}</li>
+            <li>Name :-  {adminData?.name}</li>
             <li>ID :-   {adminData.$id}</li>
             <li className={`font-semibold ${adminData.status ? "text-green-600" : "text-red-500"}`}>Status :-   {adminData.status ? "Active" : "Inactive"}</li>
             <li>Email :- {adminData.email}</li>
